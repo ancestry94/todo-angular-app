@@ -1,0 +1,31 @@
+<div *ngIf="task; else noTask" class="task-detail-container mat-elevation-z4">
+  <h2 class="task-title">{{ task.title }}</h2>
+
+  <p class="task-description">
+    <strong>Описание:</strong> {{ task.description || 'Нет описания' }}
+  </p>
+
+  <mat-form-field appearance="fill" class="status-select">
+    <mat-label>Статус</mat-label>
+    <mat-select [(value)]="editedStatus">
+      <mat-option *ngFor="let status of taskStatuses" [value]="status">
+        {{ status }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="buttons-row">
+    <button (click)="save()" [disabled]="editedStatus === task.status" color="primary" mat-raised-button>
+      Сохранить
+    </button>
+    <button (click)="cancel()" mat-button>Отмена</button>
+    <button (click)="goBack()" mat-button>Назад</button>
+  </div>
+</div>
+
+<ng-template #noTask>
+  <div class="no-task-container mat-elevation-z4">
+    <p class="no-task-message">Задача не найдена</p>
+    <button (click)="goBack()" color="primary" mat-raised-button>Назад</button>
+  </div>
+</ng-template>

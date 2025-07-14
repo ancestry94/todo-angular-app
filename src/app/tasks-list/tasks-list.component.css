@@ -1,0 +1,19 @@
+.add-task-button {
+  margin-top: 20px;
+}
+
+.no-data-message {
+  text-align: center;
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #757575;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+.no-data-message p {
+  margin: 0;
+}
+

@@ -1,0 +1,25 @@
+<div style="border: 1px solid #ccc; padding: 16px; border-radius: 4px;">
+  <mat-form-field style="width: 100%;">
+    <mat-label>Заголовок</mat-label>
+    <input matInput [(ngModel)]="title" />
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Описание</mat-label>
+    <textarea matInput rows="3" [(ngModel)]="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Статус</mat-label>
+    <mat-select [(ngModel)]="status">
+      <mat-option [value]="TaskStatus.New">Новая</mat-option>
+      <mat-option [value]="TaskStatus.InProgress">В процессе</mat-option>
+      <mat-option [value]="TaskStatus.Done">Выполнена</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div style="margin-top: 16px; text-align: right;">
+    <button mat-button color="warn" (click)="cancelForm()">Отмена</button>
+    <button mat-raised-button color="primary" (click)="save()">Сохранить</button>
+  </div>
+</div>

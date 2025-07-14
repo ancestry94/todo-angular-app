@@ -1,0 +1,51 @@
+<div style="margin: 20px;">
+  <mat-form-field appearance="outline" style="width: 100%; max-width: 400px;">
+    <mat-label>Поиск задач</mat-label>
+    <input (ngModelChange)="applyFilter()" [(ngModel)]="filterText" matInput placeholder="Введите текст для поиска"/>
+  </mat-form-field>
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table style="width: 100%; margin-top: 20px;">
+    <!-- Колонки таблицы -->
+    <ng-container matColumnDef="title">
+      <th *matHeaderCellDef mat-header-cell> Заголовок</th>
+      <td *matCellDef="let task" mat-cell> {{ task.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell> Описание</th>
+      <td *matCellDef="let task" mat-cell> {{ task.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th *matHeaderCellDef mat-header-cell> Статус</th>
+      <td *matCellDef="let task" mat-cell> {{ task.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> Действия</th>
+      <td *matCellDef="let task" mat-cell>
+        <button (click)="deleteTask(task.id)" aria-label="Удалить" color="warn" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button (click)="openDetails(task.id)" aria-label="Подробнее" color="primary" mat-icon-button>
+          <mat-icon>info</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+
+  <div *ngIf="dataSource.filteredData.length === 0" class="no-data-message mat-elevation-z2">
+    <p>Данные отсутсвуют</p>
+  </div>
+
+  <div *ngIf="showAddForm" style="margin-top: 20px;">
+    <app-task-add (cancel)="toggleAddForm()" (saveTask)="addTask($event)"></app-task-add>
+  </div>
+
+  <button (click)="toggleAddForm()" class="add-task-button" color="primary" mat-raised-button>
+    {{ showAddForm ? 'Отмена' : 'Добавить задачу' }}
+  </button>
+</div>
